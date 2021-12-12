@@ -27,6 +27,12 @@ namespace Calculus
         public const char OperationPlus = '+';
         public const char OperationMinus = '-';
 
+        private Complex _intermediateResult = null;
+        private char? _operation = null;
+
+        private bool HasPendingOperations => _intermediateResult != null;
+
+        public Complex Value 
         // TODO fill this class
     }
 }
