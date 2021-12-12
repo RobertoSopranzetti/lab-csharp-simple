@@ -1,4 +1,5 @@
 using ComplexAlgebra;
+using System;
 
 namespace Calculus
 {
@@ -32,7 +33,54 @@ namespace Calculus
 
         private bool HasPendingOperations => _intermediateResult != null;
 
-        public Complex Value 
-        // TODO fill this class
+        public Complex Value { get; set; }
+
+        public char? Operation
+        {
+            get => _operation;
+            set
+            {
+                if (HasPendingOperations) 
+                {
+                    ComputeResult();
+                }
+                _operation = value;
+                _intermediateResult = Value;
+                Value = null;
+            }
+        }
+
+        public void ComputeResult()
+        {
+            switch (_operation)
+            {
+                case OperationPlus:
+                    Value = _intermediateResult.Sum(Value);
+                    break;
+                case OperationMinus:
+                    Value = _intermediateResult.Sub(Value);
+                    break;
+                case null:
+                default:
+                    break;
+            }
+            _intermediateResult = null;
+            _operation = null;
+        }
+
+        public void Reset()
+        {
+            Value = null;
+            _intermediateResult = null;
+            _operation = null;
+        }
+
+        public override string ToString()
+        {
+            var value = Value == null ? "null" : "({Value.ToString()})";
+            var operation = Operation == null ? "null" : "'{Operation}'";
+            return $"Calculator({nameof(Value)} = {Value}, {nameof(Operation)} = {Operation})";
+        }
+
     }
 }
