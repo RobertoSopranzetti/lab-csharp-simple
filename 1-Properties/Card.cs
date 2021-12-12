@@ -1,11 +1,12 @@
 namespace Properties
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// The class models a card.
     /// </summary>
-    public class Card
+    public class Card : IEquatable<Card>
     {
         private readonly string seed;
         private readonly string name;
@@ -33,32 +34,58 @@ namespace Properties
         }
 
         // TODO improve
-        public string GetSeed()
+        public string Seed
         {
-            return this.seed;
+            get { return seed; }
         }
 
         // TODO improve
-        public string GetName()
-        {
-            return this.name;
-        }
+        public string Name => this.name;
 
         // TODO improve
-        public int GetOrdinal()
-        {
-            return this.ordinal;
-        }
+        public int Ordinal => this.ordinal;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString()
         {
             // TODO understand string interpolation
-            return $"{this.GetType().Name}(Name={this.GetName()}, Seed={this.GetSeed()}, Ordinal={this.GetOrdinal()})";
+            return $"{GetType().Name}(Name={Name}, Seed={Seed}, Ordinal={Ordinal})";
         }
 
         // TODO generate Equals(object obj)
+        public bool Equals(Card other)
+        {
+            return string.Equals(this.seed, other.seed)
+                && string.Equals(this.name,other.name)
+                && this.ordinal == other.ordinal;
+        }
 
-        // TODO generate GetHashCode()
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+            if (this == obj)
+            {
+                return true;
+            }
+            if (this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals(obj as Card);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.seed, this.name, this.ordinal);
+        }
+
+
+
+        
+
     }
 }
