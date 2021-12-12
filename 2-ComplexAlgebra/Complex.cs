@@ -49,7 +49,7 @@ namespace ComplexAlgebra
             return $"{Real} {Imaginary} i{imValue}";
         }
 
-        protected bool Equals (Complex other)
+        protected bool Equals(Complex other)
         {
             return Real.Equals(other.Real) && Imaginary.Equals(other.Imaginary);
         }
