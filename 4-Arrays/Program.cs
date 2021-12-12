@@ -91,7 +91,15 @@ namespace Arrays
         /// TODO: implement this method
         public static string ArrayToString(Complex[] array)
         {
-            return null; // TODO: remove this line
+            var representation = "[";
+            for (int i = 0; i < array.Length; i++)
+            {
+                representation += array[i].ToString();
+                representation += ";";
+            }
+            representation += array[array.Length - 1];
+            representation += "]";
+            return representation;
         }
         
         /// <summary>
