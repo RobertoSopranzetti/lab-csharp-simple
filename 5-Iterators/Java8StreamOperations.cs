@@ -53,7 +53,7 @@ namespace Iterators
         {
             foreach (var item in sequence)
             {
-
+                yield return mapper(item);
             }
         }
 
