@@ -105,7 +105,22 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static TOther Reduce<TAny, TOther>(this IEnumerable<TAny> sequence, TOther seed, Func<TOther, TAny, TOther> reducer)
         {
-            throw new NotImplementedException();
+            bool first = true;
+            TOther accumulator = default;
+            
+            foreach (var item in sequence)
+            {
+                if (first)
+                {
+                    accumulator = reducer(seed, item);
+                    first = false;
+                }
+                else
+                {
+                    accumulator = reducer(accumulator, item);
+                }
+            }
+            return accumulator;
         }
 
         /// <summary>
