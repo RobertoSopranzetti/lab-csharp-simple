@@ -161,7 +161,17 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> SkipSome<TAny>(this IEnumerable<TAny> sequence, long count)
         {
-            throw new NotImplementedException();
+            long i = 0;
+            foreach (var item in sequence)
+            {
+                if (count-- > 0)
+                {
+                    continue;
+                }
+
+                yield return item;
+            }
+
         }
 
         /// <summary>
