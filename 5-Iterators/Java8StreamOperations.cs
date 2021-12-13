@@ -32,7 +32,12 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> Peek<TAny>(this IEnumerable<TAny> sequence, Action<TAny> consumer)
         {
-            throw new NotImplementedException();
+            foreach (var item in sequence)
+            {
+                consumer(item);
+
+                yield return item;
+            }
         }
 
         /// <summary>
@@ -46,7 +51,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TOther> Map<TAny, TOther>(this IEnumerable<TAny> sequence, Func<TAny, TOther> mapper)
         {
-            foreach (var item in collection)
+            foreach (var item in sequence)
             {
 
             }
