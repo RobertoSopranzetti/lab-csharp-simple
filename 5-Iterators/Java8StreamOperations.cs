@@ -186,7 +186,14 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> TakeWhile<TAny>(this IEnumerable<TAny> sequence, Predicate<TAny> predicate)
         {
-            throw new NotImplementedException();
+            foreach (var item in sequence)
+            {
+                if (!predicate(item))
+                {
+                    break;
+                }
+                yield return item;
+            }
         }
 
         /// <summary>
@@ -199,7 +206,14 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> TakeSome<TAny>(this IEnumerable<TAny> sequence, long count)
         {
-            throw new NotImplementedException();
+            foreach (var item in sequence)
+            {
+                if (count-- <= 0)
+                {
+                    break;
+                }
+                yield return item;
+            }
         }
 
         /// <summary>
@@ -209,7 +223,11 @@ namespace Iterators
         /// <returns>an infinite sequence of integers.</returns>
         public static IEnumerable<int> Integers(int start)
         {
-            throw new NotImplementedException();
+            int i = start;
+            while (true)
+            {
+                yield return i++;
+            }
         }
 
         /// <summary>
